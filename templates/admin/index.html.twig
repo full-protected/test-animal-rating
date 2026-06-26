@@ -6,7 +6,7 @@
     <div class="container mt-5">
         <h1 class="mb-4">{{ 'admin.title'|trans }}</h1>
 
-        <table class="table table-bordered">
+        <table class="table table-bordered table-striped mb-5">
             <thead class="table-dark">
             <tr>
                 <th>#</th>
@@ -21,7 +21,10 @@
                     <td>{{ loop.index }}</td>
                     <td class="text-capitalize">{{ stat.animalName }}</td>
                     <td>{{ stat.count }}</td>
-                    <td>{{ stat.avgScore|number_format(1) }}/100</td>
+                    <td>
+                        <i class="bi bi-star-fill" style="color: gold;"></i>
+                        {{ stat.avgScore|number_format(1) }}/100
+                    </td>
                 </tr>
             {% else %}
                 <tr>
@@ -30,5 +33,47 @@
             {% endfor %}
             </tbody>
         </table>
+
+        {% if stats %}
+            <h2 class="mb-3">{{ 'admin.votes'|trans }}</h2>
+            <div class="mb-5">
+                <canvas id="animalsChart" height="100"></canvas>
+            </div>
+        {% endif %}
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {% if stats %}
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script>
+            const ctx = document.getElementById('animalsChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: [{% for stat in stats %}'{{ stat.animalName }}'{% if not loop.last %},{% endif %}{% endfor %}],
+                    datasets: [{
+                        label: '{{ 'admin.votes'|trans }}',
+                        data: [{% for stat in stats %}{{ stat.count }}{% if not loop.last %},{% endif %}{% endfor %}],
+                        backgroundColor: 'rgba(21, 88, 160, 0.7)',
+                        borderColor: 'rgba(21, 88, 160, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: { stepSize: 1 }
+                        }
+                    }
+                }
+            });
+        </script>
+    {% endif %}
 {% endblock %}
