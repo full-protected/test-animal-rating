@@ -21,7 +21,12 @@ final class HomeController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $animalRatingService->save($animalRating);
+            $animalRatingService->save(
+                $animalRating->getUserName(),
+                $animalRating->getAnimalName(),
+                $animalRating->getScore()
+            );
+
             $this->addFlash('success', 'home.success');
 
             return $this->redirectToRoute('app_home');
