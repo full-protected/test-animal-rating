@@ -1,18 +1,18 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Statistiques des animaux{% endblock %}
+{% block title %}{{ 'admin.title'|trans }}{% endblock %}
 
 {% block body %}
     <div class="container mt-5">
-        <h1 class="mb-4">Classement des animaux</h1>
+        <h1 class="mb-4">{{ 'admin.title'|trans }}</h1>
 
         <table class="table table-bordered">
             <thead class="table-dark">
             <tr>
                 <th>#</th>
-                <th>Animal</th>
-                <th>Nombre de votes</th>
-                <th>Score moyen</th>
+                <th>{{ 'admin.animal'|trans }}</th>
+                <th>{{ 'admin.votes'|trans }}</th>
+                <th>{{ 'admin.score'|trans }}</th>
             </tr>
             </thead>
             <tbody>
@@ -25,7 +25,7 @@
                 </tr>
             {% else %}
                 <tr>
-                    <td colspan="4" class="text-center text-muted">Aucun animal enregistré pour le moment</td>
+                    <td colspan="4" class="text-center text-muted">{{ 'admin.empty'|trans }}</td>
                 </tr>
             {% endfor %}
             </tbody>
