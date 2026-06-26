@@ -14,7 +14,7 @@ use Symfony\Component\HttpFoundation\Request;
 final class HomeController extends AbstractController
 {
     #[Route('/', name: 'app_home')]
-    public function index(Request $request, EntityManagerInterface $em): Response
+    public function index(Request $request, EntityManagerInterface $em, AnimalRatingRepository $repository): Response
     {
         $animalRating = new AnimalRating();
         $form = $this->createForm(AnimalRatingType::class, $animalRating);
@@ -25,7 +25,16 @@ final class HomeController extends AbstractController
             $animalRating->setUserName(trim($animalRating->getUserName()));
             $animalRating->setAnimalName(strtolower(trim($animalRating->getAnimalName())));
 
-            $em->persist($animalRating);
+            // Check if an animal is existing for this username
+            $existing = $repository->findOneBy(['userName' => $animalRating->getUserName()]);
+
+            if ($existing) {
+                $existing->setAnimalName($animalRating->getAnimalName());
+                $existing->setScore($animalRating->getScore());
+            } else {
+                $em->persist($animalRating);
+            }
+
             $em->flush();
 
             $this->addFlash('success', 'Votre animal a bien été enregistré !');
