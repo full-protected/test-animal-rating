@@ -9,10 +9,20 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ path('app_home') }}">Soumettre</a>
+                    <a class="nav-link" href="{{ path('app_home') }}">{{ 'nav.submit'|trans }}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ path('app_admin') }}">Statistiques</a>
+                    <a class="nav-link" href="{{ path('app_admin') }}">{{ 'nav.statistics'|trans }}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('app_language', {locale: 'fr'}) }}">
+                        <img src="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.0.0/flags/4x3/fr.svg" alt="FR" height="12"> FR
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('app_language', {locale: 'en'}) }}">
+                        <img src="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.0.0/flags/4x3/gb.svg" alt="GB" height="12"> EN
+                    </a>
                 </li>
             </ul>
         </div>

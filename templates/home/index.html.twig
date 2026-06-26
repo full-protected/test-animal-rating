@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Accueil{% endblock %}
+{% block title %}{{ 'home.title'|trans }}{% endblock %}
 
 {% block body %}
     <div class="container mt-5">
@@ -8,18 +8,16 @@
             <div class="col-md-6">
                 <div class="card shadow">
                     <div class="card-body">
-
-                        <h1 class="card-title">Notez votre animal préféré</h1>
+                        <h1 class="card-title">{{ 'home.title'|trans }}</h1>
 
                         {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
-                        {{ form_row(form.userName) }}
-                        {{ form_row(form.animalName) }}
-                        {{ form_row(form.score) }}
+                        {{ form_row(form.userName, {'label': 'home.name'|trans}) }}
+                        {{ form_row(form.animalName, {'label': 'home.animal'|trans}) }}
+                        {{ form_row(form.score, {'label': 'home.score'|trans}) }}
                         <button type="submit" class="btn btn-primary w-100 mt-3">
-                            Envoyer
+                            {{ 'home.submit'|trans }}
                         </button>
                         {{ form_end(form) }}
-
                     </div>
                 </div>
             </div>
