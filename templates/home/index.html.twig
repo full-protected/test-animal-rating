@@ -3,5 +3,10 @@
 {% block title %}Accueil{% endblock %}
 
 {% block body %}
-
+    {{ form_start(form) }}
+    {{ form_row(form.userName) }}
+    {{ form_row(form.animalName) }}
+    {{ form_row(form.score) }}
+    <button type="submit">Envoyer</button>
+    {{ form_end(form) }}
 {% endblock %}
