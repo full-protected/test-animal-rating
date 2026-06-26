@@ -3,5 +3,26 @@
 {% block title %}Accueil{% endblock %}
 
 {% block body %}
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card shadow">
+                    <div class="card-body">
 
+                        <h1 class="card-title">Notez votre animal préféré</h1>
+
+                        {{ form_start(form) }}
+                        {{ form_row(form.userName) }}
+                        {{ form_row(form.animalName) }}
+                        {{ form_row(form.score) }}
+                        <button type="submit" class="btn btn-primary w-100 mt-3">
+                            Envoyer
+                        </button>
+                        {{ form_end(form) }}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
