@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\AnimalRating;
+use App\Data\AnimalList;
 use App\Form\AnimalRatingType;
 use App\Service\AnimalRatingService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -21,13 +22,17 @@ final class HomeController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $animalRatingService->save($animalRating);
-            $this->addFlash('success', 'Votre animal a bien été enregistré !');
+            $this->addFlash('success', 'home.success');
+
             return $this->redirectToRoute('app_home');
         }
 
+        $locale = $request->getLocale();
+        $animals = $locale === 'fr' ? AnimalList::getFrench() : AnimalList::getEnglish();
 
         return $this->render('home/index.html.twig', [
             'form' => $form,
+            'animals' => $animals,
         ]);
     }
 }

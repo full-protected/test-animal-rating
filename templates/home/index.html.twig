@@ -12,7 +12,17 @@
 
                         {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
                         {{ form_row(form.userName, {'label': 'home.name'|trans}) }}
-                        {{ form_row(form.animalName, {'label': 'home.animal'|trans}) }}
+                        {{ form_row(form.animalName, {
+                            'label': 'home.animal'|trans,
+                            'attr': {'list': 'animals-list', 'autocomplete': 'off'}
+                        }) }}
+
+                        <datalist id="animals-list">
+                            {% for animal in animals %}
+                            <option value="{{ animal }}">
+                                {% endfor %}
+                        </datalist>
+                        
                         {{ form_row(form.score, {'label': 'home.score'|trans}) }}
                         <button type="submit" class="btn btn-primary w-100 mt-3">
                             {{ 'home.submit'|trans }}
