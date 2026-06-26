@@ -1,0 +1,25 @@
+footer {
+    background: linear-gradient(90deg, #1a1a2e 0%, #16213e 100%) !important;
+    border-top: 2px solid rgba(79,195,247,0.3);
+    padding: 1.2rem 0;
+}
+
+footer a {
+    color: rgba(255,255,255,0.75) !important;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+footer a:hover {
+    color: #4fc3f7 !important;
+}
+
+footer .list-inline-item:not(:last-child)::after {
+    content: '|';
+    color: rgba(255,255,255,0.2);
+    margin-left: 0.75rem;
+}
+
+footer small {
+    color: rgba(255,255,255,0.4);
+}
