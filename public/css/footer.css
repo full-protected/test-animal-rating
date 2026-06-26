@@ -1,6 +1,6 @@
 footer {
-    background: linear-gradient(90deg, #1a1a2e 0%, #16213e 100%) !important;
-    border-top: 2px solid rgba(79,195,247,0.3);
+    background-color: #212529 !important;
+    border-top: 2px solid rgba(255,255,255,0.1);
     padding: 1.2rem 0;
 }
 

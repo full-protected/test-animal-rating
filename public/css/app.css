@@ -1,0 +1,17 @@
+:root {
+    --dark-bg: #1a1a2e;
+    --dark-bg2: #16213e;
+}
+
+body {
+    background-color: #f8f9fa;
+}
+
+.btn-primary {
+    background-color: #1558a0 !important;
+    border-color: #0f4080 !important;
+}
+
+.btn-primary:hover {
+    background-color: #0f4080 !important;
+}
