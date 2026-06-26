@@ -31,8 +31,12 @@ class AnimalRatingService
 
         // User already has 3 animals — remove the one with the lowest score (oldest if tie)
         if (count($existing) >= self::MAX_ANIMALS) {
-            $toRemove = $this->resolveTripleChoice($existing);
-            $this->em->remove($toRemove);
+            $toRemove = $this->resolveTripleChoice($existing, $newEntry);
+            foreach ($existing as $animal) {
+                if (!in_array($animal, $toRemove)) {
+                    $this->em->remove($animal);
+                }
+            }
         }
 
         $this->em->persist($newEntry);
@@ -40,12 +44,17 @@ class AnimalRatingService
     }
 
     /**
-     * Returns the animal to remove (lowest score, oldest if tie)
+     * Returns the 3 animals to keep (last entry is always kept)
      *
      * @param AnimalRating[] $existing
+     * @return AnimalRating[]
      */
-    private function resolveTripleChoice(array $existing): AnimalRating
+    public function resolveTripleChoice(array $existing, AnimalRating $newEntry): array
     {
+        if (count($existing) < self::MAX_ANIMALS) {
+            return [...$existing, $newEntry];
+        }
+
         usort($existing, function (AnimalRating $a, AnimalRating $b) {
             if ($a->getScore() === $b->getScore()) {
                 return $a->getCreatedAt() <=> $b->getCreatedAt();
@@ -53,7 +62,9 @@ class AnimalRatingService
             return $a->getScore() <=> $b->getScore();
         });
 
-        return $existing[0];
+        // Remove the worst, keep the rest + new entry
+        array_shift($existing);
+        return [...$existing, $newEntry];
     }
 
     public function normalize(string $value): string
