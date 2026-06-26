@@ -15,9 +15,6 @@ class AnimalRatingType extends AbstractType
             ->add('userName')
             ->add('animalName')
             ->add('score')
-            ->add('createdAt', null, [
-                'widget' => 'single_text',
-            ])
         ;
     }
 

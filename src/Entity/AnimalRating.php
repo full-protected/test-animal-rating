@@ -6,6 +6,7 @@ use App\Repository\AnimalRatingRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: AnimalRatingRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class AnimalRating
 {
     #[ORM\Id]
@@ -24,6 +25,12 @@ class AnimalRating
 
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
+
+    #[ORM\PrePersist]
+    public function setCreatedAtValue(): void
+    {
+        $this->createdAt = new \DateTimeImmutable();
+    }
 
     public function getId(): ?int
     {
