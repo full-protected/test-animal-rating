@@ -16,6 +16,16 @@ class AnimalRatingRepository extends ServiceEntityRepository
         parent::__construct($registry, AnimalRating::class);
     }
 
+    public function getAnimalStats(): array
+    {
+        return $this->createQueryBuilder('a')
+            ->select('a.animalName, COUNT(a.id) as count, AVG(a.score) as avgScore')
+            ->groupBy('a.animalName')
+            ->orderBy('count', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
     //    /**
     //     * @return AnimalRating[] Returns an array of AnimalRating objects
     //     */
