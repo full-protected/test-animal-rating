@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\AnimalRatingRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: AnimalRatingRepository::class)]
 #[ORM\HasLifecycleCallbacks]
@@ -15,12 +16,18 @@ class AnimalRating
     private ?int $id = null;
 
     #[ORM\Column(length: 100)]
+    #[Assert\NotBlank(message: 'Veuillez entrer votre nom')]
+    #[Assert\Length(max: 100)]
     private ?string $userName = null;
 
     #[ORM\Column(length: 100)]
+    #[Assert\NotBlank(message: 'Veuillez entrer un animal')]
+    #[Assert\Length(max: 100)]
     private ?string $animalName = null;
 
     #[ORM\Column]
+    #[Assert\NotBlank(message: 'Veuillez entrer une note')]
+    #[Assert\Range(min: 0, max: 100, notInRangeMessage: 'La note doit être entre 0 et 100')]
     private ?int $score = null;
 
     #[ORM\Column]
