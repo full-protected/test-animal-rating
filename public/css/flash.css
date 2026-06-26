@@ -1,0 +1,8 @@
+.flash-container {
+    width: 700px;
+    margin: 20px auto;
+}
+
+.flash-container .alert {
+    text-align: center;
+}
