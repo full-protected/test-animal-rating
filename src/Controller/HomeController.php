@@ -21,6 +21,10 @@ final class HomeController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // Normalize userName & animalName
+            $animalRating->setUserName(trim($animalRating->getUserName()));
+            $animalRating->setAnimalName(strtolower(trim($animalRating->getAnimalName())));
+
             $em->persist($animalRating);
             $em->flush();
 
