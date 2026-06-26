@@ -26,7 +26,7 @@ final class HomeController extends AbstractController
                 $animalRating->getAnimalName(),
                 $animalRating->getScore()
             );
-            
+
             $this->addFlash('success', 'home.success');
 
             return $this->redirectToRoute('app_home');
